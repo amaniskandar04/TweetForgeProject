@@ -1,0 +1,23 @@
+.feed{
+    flex: 0.5;
+    max-width: 100%;
+    overflow-y: scroll;
+    flex-wrap: wrap; /* Allow flex items to wrap onto new lines */
+    color: aliceblue;
+    font-family: Arial, sans-serif; /* Font family */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.feed::-webkit-scrollbar{
+    display: hide;
+}
+
+.feed__header{
+    position:sticky;
+    top:0;
+    z-index: 100;
+    border-bottom: 1px solid rgb(56, 56, 56);
+    padding: 10px 20px;
+    background-color: black;
+}
