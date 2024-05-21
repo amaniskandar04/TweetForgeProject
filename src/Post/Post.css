@@ -27,9 +27,11 @@
 .likecomment{
     display : flex;
     align-items: center;
+    cursor:pointer;
 }
 
 .likecomment > p{
     margin-left: 5px;
 }
+
 

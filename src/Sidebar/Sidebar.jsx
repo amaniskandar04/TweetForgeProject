@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 
 import "./Sidebar.css";
 import CottageIcon from '@mui/icons-material/Cottage';
@@ -17,7 +18,7 @@ function Sidebar(){
         <>
             <div className= "sidebar">
                 <br></br> <br></br> <br></br>
-                <SidebarOptions Icon ={CottageIcon} name = "Home" />
+                <SidebarOptions Icon ={CottageIcon} name = "Home" path = "/home" />
                 <SidebarOptions Icon ={SettingsApplicationsIcon} name = "Settings" />
                 <SidebarOptions Icon ={SearchIcon} name = "Search" />
                 <SidebarOptions Icon ={EditIcon} name = "Tweet" />

@@ -1,0 +1,23 @@
+.login{
+    display: flex;
+    flex-direction: column;
+    flex:0.6;
+    justify-content: center; /* Center horizontally */
+    align-items: center;    /* Center vertically */
+    height: 100vh;
+}
+
+.form-container{
+    display:flex;
+    flex-direction: column;
+    flex:0.6;
+    justify-content: center; /* Center horizontally */
+    align-items: center;    /* Center vertically */
+    height: 100vh;
+}
+.to-register{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+

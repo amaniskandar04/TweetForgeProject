@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 
 
-import Sidebar from './Sidebar.jsx';
+import Sidebar from '../Sidebar/Sidebar.jsx';
 import Feed from './Feed.jsx';
 import Widget from './Widget.jsx';
-import './index.css';
+import '../index.css';
+import SinglePost from './SinglePost.jsx';
 
 
 function Homescreen() {
@@ -14,7 +15,8 @@ function Homescreen() {
     <>
       <div className = "homescreen">
         <Sidebar />
-        <Feed />
+        
+        <Feed></Feed>
         <Widget />
       </div>
     </>
