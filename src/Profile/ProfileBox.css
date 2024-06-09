@@ -1,0 +1,62 @@
+
+
+.profile__box{
+    
+    margin-top: 50px;
+    padding-bottom: 30px;
+
+}
+
+.avatar{
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-bottom: 30px;
+}
+
+.description{
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.username__profile__box{
+    font-size: 30px;
+}
+
+.profile__footer {
+    display:flex;
+    border-bottom: 2px solid rgb(56, 56, 56);
+    justify-content: space-evenly;
+    background-color: black;
+ 
+}
+
+.profile__footer > button {
+    font-weight: bold;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: black;
+    color: aliceblue;
+    display: inline-block; /* Ensures the underline matches the text width */
+    position: relative; /* Needed for the absolute positioning of the pseudo-element */ 
+    margin-bottom: 10px;
+  }
+  
+  .profile__footer > button.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -5px; /* Adjust this value to control the distance from the text */
+    height: 3px; /* Adjust this value to control the thickness of the underline */
+    background-color: blue;
+    border-radius: 5px; /* Optional: round the edges of the underline */
+    background: rgb(0, 128, 208);
+    border-radius: 5px;
+    left: 0;
+    bottom: -10px; /* Distance from the text */
+    height: 5px; /* Thickness of the underline */
+  }
+
+
+

@@ -1,8 +1,44 @@
-
-
-.widget{
+.widget-container {
+    display: flex;
+    flex:0.30;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Adjust this value if needed */
     border-left: 1px solid rgb(56, 56, 56);
+  }
+  
+  .widget {
+    border: 1px solid rgb(56, 56, 56);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 20px;
     flex: 0.25;
+    width: fit-content;
+    
+    min-width: 80%;
+  }
 
-    margin-right: 20px;
-}
+  .top-bottom{
+    display: flex;
+    justify-content: center;
+    
+    width: 100%;
+  }
+
+  .boxes{
+    padding-left: 20px;
+    
+  }
+
+  .boxes:hover{
+    background-color: rgb(56, 56, 56);
+    cursor: pointer;
+  }
+
+  .smol{
+    font-size: 13px;
+    font-weight:100;
+    color: gray;
+  }
+

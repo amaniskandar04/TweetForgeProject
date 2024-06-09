@@ -1,10 +1,23 @@
 import React from "react";
 import "./SidebarOptions.css"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-function SidebarOptions({Icon, name, path}){
+function SidebarOptions({Icon, name, path, logout}){
+
+    const navigate = useNavigate();
+    
+
+    const handleLogout = () =>{
+        if(logout === true){
+            localStorage.removeItem('token');
+            
+            navigate(path);
+        }
+    }
+    
     return(
-        <Link to={path} className = "sidebarOptions">
+
+        <Link to={path} className = "sidebarOptions" onClick={logout == true ? handleLogout : null}>
             <Icon />
             <h2>{name}</h2>
         </Link>

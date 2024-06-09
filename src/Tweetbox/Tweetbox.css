@@ -1,52 +1,93 @@
-.tweetBox{
+.tweetBox {
     color: aliceblue;
     padding-bottom: 10px;
     border-bottom: 2px solid rgb(56, 56, 56);
     padding-right: 10px;
+    position: relative; /* Ensure the suggestions are positioned relative to the tweetBox */
 }
 
-.tweetBox > form{
+.tweetBox > form {
     display: flex;
     flex-direction: column;
 }
 
-.tweetbox_input{
+.tweetbox_input {
     padding: 20px;
-    display:flex;
+    display: flex;
 }
 
-
-.tweetbox_input > input{
+.tweetbox_input > input, .tweetbox_input > textarea {
     flex: 1;
     margin-left: 20px;
     font-size: 20px;
-    border:none;
-    border-color: black;
+    border: none;
     background-color: black;
     color: aliceblue;
-    max-width: 1000px;
-    outline:none;
+    outline: none;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
+.input_container {
+    position: relative;
+}
 
-.input_hashtag{
+.input_hashtag {
     flex: 1;
     margin-left: 20px;
     margin-right: 20px;
     font-size: 16px;
-    border:none;
-    border-color: black;
+    border: none;
     background-color: black;
     color: aliceblue;
-    max-width: 1000px;
     padding: 10px;
-    display:flex;
+    outline: none;
+    width: calc(100% - 40px); /* Adjust width to match margin */
+}
+
+.suggestions {
+    background-color: black;
+    color: aliceblue;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-height: 150px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    width: 50%; /* Adjust width as needed */
+    margin-top: 2px; /* Space between input and dropdown */
+}
+
+.suggestions::-webkit-scrollbar {
+    display: none;
+}
+
+.suggestions li {
+    padding: 10px;
+    cursor: pointer;
+    
+}
+
+.suggestions li:hover {
+    background-color: rgb(0, 128, 208);
+    color: aliceblue;
+}
+
+.butang-position {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.butang{
+    margin-right: 20px;
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(0, 128, 208);
+    color: aliceblue;
     outline:none;
 }
-
-.butang-position{
-    display:flex;
-    justify-content: end;
-    align-items:center;
-}
-

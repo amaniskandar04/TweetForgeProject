@@ -1,8 +1,53 @@
 .sidebar{
+    display: flex;
+    flex-direction: column;
     border-right: 1px solid rgb(56, 56, 56);
-    flex: 0.25;
+    flex: 0.18;
 
-    margin-left: 20px;
-
+    margin-left: 5rem;
+  
+    height: 100vh;
     
+}
+
+.epc{
+    flex: 1;
+}
+
+.lower__container{
+    border: 1px solid black;
+    border-radius: 30px;
+    margin-bottom: 50px;
+    margin-right: 20px;
+    padding-left: 10px;
+
+    padding-bottom: 5px;
+    font-family: Arial, Helvetica, sans-serif; 
+    font-size: 15px;
+}
+
+.lower__container:hover{
+    background-color: rgb(56, 56, 56);
+}
+
+.logo{    
+    padding-top: 20px;
+}
+
+.logo__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.logo__container > h2{
+    padding-top: 12px;
+    margin-left: 5px;
+}
+
+.lower__container {
+    display: flex;
+    align-items: center; /* Vertically align items */
 }
