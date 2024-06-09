@@ -1,5 +1,5 @@
 1. Open the java zip as a project in Netbeans.
 2. Run the RealStartApplication.java file.
 3. Open Visual Studios
-4. Open the React zip and install necessary files (usually its just npm install on the command prompt)
+4. Open the React zip (in zal branch) and install necessary files (usually its just npm install on the command prompt)
 5. Run the code by typing npm run dev.
