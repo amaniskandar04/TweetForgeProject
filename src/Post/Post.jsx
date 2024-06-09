@@ -9,7 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 
 
-function Post({ tweetId, userId, username, text, numOflikes, onClick, deletePost }) {
+function Post({ tweetId, userId, username, text, numOflikes, onClick, deletePost , isComment}) {
 
     const [likes, setLikes] = useState(numOflikes);
     const [likedByUser, setLikedByUser] = useState(false);
@@ -70,7 +70,7 @@ function Post({ tweetId, userId, username, text, numOflikes, onClick, deletePost
         console.log("stfu");
     };
 
-    const handleDeleteComment = async (event) => {
+    const handleDeletePost = async (event) => {
         event.stopPropagation();
         
         
@@ -78,7 +78,8 @@ function Post({ tweetId, userId, username, text, numOflikes, onClick, deletePost
             console.log("SUCCESS: "+user.id)
             try {
 
-                const response = await axios.put(`http://localhost:8080/tweets/${tweetId}`);
+                const endpoint = isComment ? `http://localhost:8080/tweets/comment/${tweetId}` : `http://localhost:8080/tweets/${tweetId}`;
+                const response = await axios.put(endpoint);
     
                 if (response.status === 200) {
                     console.log("TweetId: " + tweetId);
@@ -96,7 +97,7 @@ function Post({ tweetId, userId, username, text, numOflikes, onClick, deletePost
                 console.error('Error:', error);
             }
         }else{
-            console.log("Brother you don't own that comment!")
+            console.log("Brother you don't own that post!")
         }
 
         
@@ -137,7 +138,7 @@ function Post({ tweetId, userId, username, text, numOflikes, onClick, deletePost
 
                     {user && user.id === userId && (
                         <div className='likecomment'>
-                            <button onClick={handleDeleteComment}>
+                            <button onClick={handleDeletePost}>
                                 <DeleteIcon />
                             </button>
                         </div>

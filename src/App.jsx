@@ -10,6 +10,7 @@ import PostScreen from './Homescreen/PostScreen.jsx'
 import ProfileBox from './Profile/ProfileBox.jsx';
 import ProfileFeed from './Profile/ProfileFeed.jsx';
 import Profile from './Profile/Profile.jsx';
+import Settings from './Settings/Settings.jsx'
 
 import './index.css';
 import ProfilePage from './Profile/ProfilePage.jsx';
@@ -42,6 +43,7 @@ function App() {
             <Route path="/:id" element={<Profile />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/settings" element={<Settings />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/home" />} />

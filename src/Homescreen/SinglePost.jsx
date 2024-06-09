@@ -107,8 +107,9 @@ function SinglePost() {
             text={post.content + (Array.isArray(post.hashtags) ? ' ' + post.hashtags.join(' ') : '')}
             numOflikes={numberOfLikes(post)}
             onClick={() => handleClick(post)}
-            deletePost={deletePost}>
-
+            deletePost={deletePost} 
+            isComment = {true}>
+            
           </Post>
         ))}
 
