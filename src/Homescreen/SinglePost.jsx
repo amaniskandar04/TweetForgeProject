@@ -34,7 +34,7 @@ function SinglePost() {
 
     const id = 'test';
     setPosts([]);
-    navigate(`/comments/${post.commentId}`, { state: { username: post.userId, text: post.content, tags: post.tags } });
+    navigate(`/comments/${post.commentId}`, { state: { userId: post.userId ,username: post.username, text: post.content, tags: post.hashtags } });
 
   };
 
