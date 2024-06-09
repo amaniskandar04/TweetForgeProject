@@ -46,16 +46,18 @@ function Post({ tweetId, userId, username, text, numOflikes, onClick, deletePost
     const handleLikeClick = async (event) => {
         event.stopPropagation(); // Prevents the onClick event from bubbling up
         //code to update to the database
-
+        
+        const likeEndpoint = isComment ? `http://localhost:8080/tweets/${tweetId}/likeComment` : `http://localhost:8080/tweets/${tweetId}/like`;
+        const unlikeEndpoint = isComment ? `http://localhost:8080/tweets/${tweetId}/unlikeComment` : `http://localhost:8080/tweets/${tweetId}/unlike`;
         
 
         try {
             if (likedByUser) {
-                await axios.post(`http://localhost:8080/tweets/${tweetId}/unlike`, { userId: user.id });
+                await axios.post(unlikeEndpoint, { userId: user.id });
                 setLikes(likes - 1);
                 setLikedByUser(false);
             } else {
-                await axios.post(`http://localhost:8080/tweets/${tweetId}/like`, { userId: user.id });
+                await axios.post(likeEndpoint, { userId: user.id });
                 setLikes(likes + 1);
                 setLikedByUser(true);
             }
