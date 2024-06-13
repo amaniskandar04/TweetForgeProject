@@ -7,10 +7,16 @@ import { useNavigate } from 'react-router-dom';
 import { colors } from '@mui/material';
 import { red } from '@mui/material/colors';
 import axios from 'axios';
+import LoadingBarReal from './LoadingBarReal.jsx';
+
+// import Box from '@mui/material/Box';
+
 
 
 function Feed(){
     const [posts, setPosts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    
     const navigate = useNavigate();
 
     
@@ -28,9 +34,13 @@ function Feed(){
             id: (posts.length + 1).toString().padStart(2, '0'),
             userId: user ? user.id : 'unknown',
             username: user ? user.username : 'loading...',
-            content: text || 'loading...',
-            hashtags: tags || '',
+            content: text +' '+tags|| 'loading...',
             likeUserIds,
+            // id: (posts.length + 1).toString().padStart(2, '0'),
+            // userId: 'Loading...',
+            // username: 'loading...',
+            // content: 'loading...',
+            // likeUserIds,
         };
         
         setPosts([newPost,...posts]);
@@ -43,7 +53,7 @@ function Feed(){
         
         
         const numOflikes = numberOfLikes(post);
-        navigate(`/comments/${post.tweetId}`, { state: { userId :post.userId,username: post.username, text: post.content, tags: post.hashtags, numOflikes} });
+        navigate(`/comments/${post.tweetId}`, { state: { userId :post.userId,username: post.username, text: post.content, tags: post.hashtags, numOflikes, statusDelete: post.statusDelete} });
     }
 
     //fetch data from mongodb
@@ -61,7 +71,7 @@ function Feed(){
             const response = await axios.post(`http://localhost:8080/recTweets/upload`, user);
 
             if (response.status === 200) {
-
+                setIsLoading(false);
                 const tweetData = response.data;
                 
                 setPosts(tweetData)
@@ -76,7 +86,12 @@ function Feed(){
         }
     };
 
+
+
     useEffect(() => {
+        //how to add loading bar here
+        setIsLoading(true);
+
         fetchTweetData(); // Fetch user data when component mounts
         
     }, []);
@@ -95,26 +110,28 @@ function Feed(){
     return(
         <div className="feed">
             <div className = 'feed__header'>
-                <h2> TweetForge Test Area </h2>              
+                <h2> TweetForge </h2>              
             </div>
             
             <Tweetbox addPost={addPost}/>
-            {posts.map((post) => (
-                <Post 
-                key={post.tweetId} 
-                userId = {post.userId}
-                tweetId={post.tweetId} 
-                username={post.username} 
-                text={post.content + (Array.isArray(post.hashtags) ? ' ' + post.hashtags.join(' ') : '')}
-                numOflikes = {numberOfLikes(post)} 
-                onClick={()=> handleClick(post)} 
-                deletePost={deletePost}>
-                    
-                </Post>
-            ))}
-            
-            
-            
+
+            {isLoading ? (
+                <LoadingBarReal />
+            ) : (
+                // Render posts if isLoading is false
+                posts.map((post) => (
+                    <Post
+                        key={post.tweetId}
+                        userId={post.userId}
+                        tweetId={post.tweetId}
+                        username={post.username}
+                        text={post.content + (Array.isArray(post.hashtags) ? ' ' + post.hashtags.join(' ') : '')}
+                        numOflikes={numberOfLikes(post)}
+                        onClick={() => handleClick(post)}
+                        deletePost={deletePost}
+                    />
+                ))
+            )}
         </div>
     );
 }

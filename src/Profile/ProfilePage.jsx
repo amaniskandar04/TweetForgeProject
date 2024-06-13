@@ -12,12 +12,8 @@ function ProfilePage() {
   
   
   return(
-    <>
-      <div className = "homescreen">
-        
+    <>   
         <Profile></Profile>
-        
-      </div>
     </>
   );
 }

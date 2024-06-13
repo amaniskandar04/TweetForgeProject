@@ -28,6 +28,9 @@
     display : flex;
     align-items: center;
     cursor:pointer;
+    outline: none;
+    border: none;
+    
 }
 
 .likecomment > p{
@@ -35,3 +38,6 @@
 }
 
 
+.epico{
+    background-color: black;
+}

@@ -9,7 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 
 
-function Post({ tweetId, userId, username, text, numOflikes, onClick, deletePost , isComment}) {
+function Post({ tweetId, userId, username, text, numOflikes, onClick, deletePost , isComment , imageUrl}) {
 
     const [likes, setLikes] = useState(numOflikes);
     const [likedByUser, setLikedByUser] = useState(false);
@@ -109,7 +109,7 @@ function Post({ tweetId, userId, username, text, numOflikes, onClick, deletePost
     return (
         <div className='post' onClick={onClick} >
             <div className="post__avatar">
-                <Avatar src='' />
+                <Avatar src={imageUrl} />
             </div>
             <div className="post__body">
                 <div className="post__header" >
@@ -123,25 +123,25 @@ function Post({ tweetId, userId, username, text, numOflikes, onClick, deletePost
                 <div className="post__footer">
 
                     <div className='likecomment'>
-                        <button onClick={handleCommentClick}>
-                            <CommentIcon fontSize="small" />
+                        <button className = 'epico' onClick={handleCommentClick}>
+                            <CommentIcon fontSize="small" style={{ color: "gray" }} />
                         </button>
 
-                        <p>{comment}</p>
+                    
                     </div>
 
                     <div className='likecomment'>
-                        <button onClick={handleLikeClick}>
-                            {likedByUser ? <ThumbUpAltIcon fontSize='small' /> : <ThumbUpOffAltIcon fontSize='small' />}
+                        <button className = 'epico' onClick={handleLikeClick}>
+                            {likedByUser ? <ThumbUpAltIcon fontSize='small' style={{ color: "rgb(0, 128, 208)" }} /> : <ThumbUpOffAltIcon fontSize='small' style={{ color: "gray" }} />}
                         </button>
 
                         <p>{likes}</p>
                     </div>
 
                     {user && user.id === userId && (
-                        <div className='likecomment'>
-                            <button onClick={handleDeletePost}>
-                                <DeleteIcon />
+                        <div  className='likecomment'>
+                            <button className = 'epico' onClick={handleDeletePost}>
+                                <DeleteIcon style={{ color: "gray" }}/>
                             </button>
                         </div>
                     )}

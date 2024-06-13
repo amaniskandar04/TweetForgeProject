@@ -12,12 +12,13 @@ function SinglePost() {
   const { id } = useParams();
 
   const location = useLocation();
-  const { userId, username, text, tags, numOflikes } = location.state || {};
+  const { userId, username, text, tags, numOflikes , statusDelete} = location.state || {};
   const navigate = useNavigate();
 
 
 
   const [posts, setPosts] = useState([]);
+  const [postIsDeleted, setPostIsDeleted] = useState(false);
 
   const addTweet = (username, text, tags) => {
     const newPost = {
@@ -32,9 +33,10 @@ function SinglePost() {
   //clicking on the comments down below
   const handleClick = (post) => {
 
+    //if the comment
     const id = 'test';
     setPosts([]);
-    navigate(`/comments/${post.commentId}`, { state: { userId: post.userId ,username: post.username, text: post.content, tags: post.hashtags } });
+    navigate(`/comments/${post.commentId}`, { state: { userId: post.userId, username: post.username, text: post.content, tags: post.hashtags, statusDelete: post.statusDelete } });
 
   };
 
@@ -44,9 +46,9 @@ function SinglePost() {
       const response = await axios.get(`http://localhost:8080/tweets/byParentId/${id}`);
 
       if (response.status === 200) {
-
+        
         const tweetData = response.data;
-
+        
         setPosts(tweetData)
 
         console.log("Data: ", posts)
@@ -61,8 +63,11 @@ function SinglePost() {
   };
 
   useEffect(() => {
+    //check if the post is already deleted
+
+    setPostIsDeleted(statusDelete);
     fetchCommentData();
-  }, [id]);
+  }, [id,setPostIsDeleted,statusDelete]);
 
   const numberOfLikes = (post) => {
     return Array.isArray(post.likeUserIds) ? post.likeUserIds.length : 0;
@@ -76,7 +81,9 @@ function SinglePost() {
   };
 
   const deleteComment = (tweetId) => {
-    
+    setPostIsDeleted(true);
+    //now the do logic nigga
+
   };
 
 
@@ -88,14 +95,27 @@ function SinglePost() {
           <h2> Post </h2>
         </div>
 
-        
-        <Post
-          userId={userId}
-          username={username}
-          text={text + (Array.isArray(tags) ? ' ' + tags.join(' ') : '')}
-          numOflikes={numOflikes}
-          deletePost={deleteComment}>
-        </Post>
+        {/* need to revamp this code so that it stores to the database        */}
+        {
+          postIsDeleted == false ? (<Post
+            userId={userId}
+            tweetId={id}
+            username={username}
+            text={text + (Array.isArray(tags) ? ' ' + tags.join(' ') : '')}
+            numOflikes={numOflikes}
+            deletePost={deleteComment}>
+          </Post>) 
+          
+          : (
+            <Post
+            userId="deleted"
+            username="deleted"
+            text="Post deleted by user"
+            numOflikes={numOflikes}
+            >
+          </Post>
+          )
+        }
 
         <Comment addTweet={addTweet} />
         {posts.map((post) => (
@@ -107,9 +127,9 @@ function SinglePost() {
             text={post.content + (Array.isArray(post.hashtags) ? ' ' + post.hashtags.join(' ') : '')}
             numOflikes={numberOfLikes(post)}
             onClick={() => handleClick(post)}
-            deletePost={deletePost} 
-            isComment = {true}>
-            
+            deletePost={deletePost}
+            isComment={true}>
+
           </Post>
         ))}
 

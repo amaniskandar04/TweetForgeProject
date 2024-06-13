@@ -74,7 +74,7 @@ function Login() {
 
                             <div className ='info'>
                                 <h2>Password:</h2>
-                                <input type="text" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                             </div>
 
                             

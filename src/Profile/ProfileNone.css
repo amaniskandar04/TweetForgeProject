@@ -1,0 +1,56 @@
+body{
+    background-color: #000000;
+    margin: 0;
+    padding: 0;
+    color:aliceblue;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .homescreen{
+    display: flex;
+    height: 100vh;
+  }
+
+  .middle{
+    flex: 0.5;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure it takes the full height of the body */
+    width: 100%;  /* Adjust as needed */
+  }
+
+  .profile__header{
+    display:flex;
+    align-items: center;
+    position:sticky;
+    top:0;
+    z-index: 100;
+    border-bottom: 1px solid rgb(56, 56, 56);
+    padding: 10px 20px;
+    background-color: black;
+}
+
+.profile__header > h2 {
+    margin-left: 30px;
+}
+
+.notfound {
+    flex-grow: 1; /* Take up the remaining space */
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center;     /* Center the content vertically */
+}
+
+.notfoundentity{
+    display: flex;
+    flex-direction: column;  
+    justify-content: center; /* Center the content horizontally */
+    align-items: center;     /* Center the content vertically */
+}
+
+.notfoundentity > p{
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+}

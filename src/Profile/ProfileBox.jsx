@@ -4,25 +4,28 @@ import { Avatar, Button } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import ProfileNone from './ProfileNone';
 
 
 
 //this is the profilebox, where I manipulate the code for user profile
 
-function ProfileBox({ setActiveButton, activeButton }) {
+function ProfileBox({ setActiveButton, activeButton, setProfileExist }) {
     const { id } = useParams(); // Access the :id part of the URL
     // id will contain the value from the URL, e.g., 'abu' from '/abu'
+    const [profilePicturePreview, setProfilePicturePreview] = useState(null);
+    const [userId, setUserId] = useState(''); 
 
     const hardcodedProfile = {
-        izzhan: { name: 'izzhan', email: 'sigma', password:"ohio"}
+        izzhan: { name: 'izzhan', email: 'sigma', password: "ohio" }
     };
 
-    
-    const [userProfile, setUserProfile] = useState({hardcodedProfile});
 
-    
+    const [userProfile, setUserProfile] = useState({ hardcodedProfile });
 
-    
+
+
+
     useEffect(() => {
         const fetchUserData = async () => {
             try {
@@ -31,7 +34,7 @@ function ProfileBox({ setActiveButton, activeButton }) {
                 if (response.status === 200) {
 
                     const userData = response.data;
-                    console.log(userData);
+                    
                     const updatedProfiles = {};
                     userData.forEach(user => {
                         updatedProfiles[user.username] = {
@@ -39,6 +42,8 @@ function ProfileBox({ setActiveButton, activeButton }) {
                             email: user.email,
                             password: user.password,
                             tweets: user.tweets,
+                            title: user.title,
+                            description: user.description,
                             // Add other properties from user data as needed
                         };
                     });
@@ -59,7 +64,30 @@ function ProfileBox({ setActiveButton, activeButton }) {
         };
 
         fetchUserData(); // Fetch user data when component mounts
-    }, []);
+
+        const fetchProfilePicture = async () => {
+            try {
+                const user = localStorage.getItem('userData');
+                const userData = JSON.parse(user);
+                setUserId(userData.id);
+
+                if (userId) {
+                    const response = await axios.get(`http://localhost:8080/TweetForge/${userId}/userPic`, { responseType: 'blob' });
+                    if (response.status === 200) {
+                        const imageUrl = URL.createObjectURL(response.data);
+                        console.log(imageUrl);
+                        setProfilePicturePreview(imageUrl);
+                    }else{
+                        console.log("SOMETHING WRONG WHEN FETCHING PROFILE PIC")
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching profile picture:', error);
+            }
+        };
+
+        fetchProfilePicture();
+    }, [userId]);
 
 
 
@@ -67,9 +95,20 @@ function ProfileBox({ setActiveButton, activeButton }) {
 
     const profile = userProfile[id]; // Look up the profile by the id
 
+    useEffect(() => {
+        if (!profile) {
+            setProfileExist(false);
+        } else {
+            setProfileExist(true);
+        }
+        console.log(profile)
+    }, [profile, setProfileExist]);
+
     if (!profile) {
-        return <div>User not found</div>; // Handle case where user is not found
+        return <ProfileNone />;
     }
+
+    
 
     return (
         <>
@@ -83,12 +122,13 @@ function ProfileBox({ setActiveButton, activeButton }) {
                         height: '100%',
                     },
                 }} >
-                    <img src={profile.image} alt="sigma" />
+                    <img src={profilePicturePreview} alt="sigma" />
                 </Avatar>
                 <div className='description'>
                     <h2>{profile.name}</h2>
-                    <h3>{profile.password}</h3>
-                    <p>{profile.email}</p>
+                    {profile.title ? (<h3>{profile.title}</h3>) : (<h3>Default Title</h3>)}
+                    {profile.description ? (<p>{profile.description}</p>) : (<p>Default Description</p>)}
+                    
                 </div>
             </div>
 
